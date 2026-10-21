@@ -4,14 +4,9 @@ public class Main {
 
     public static void main(String[] args) {
        Puntos p = new Puntos();
-       //p.punto1();
+        System.out.println(p.esPalindromo("anitalavalatina"));
 
-       // p.punto2();
 
-        // p.punto3();
-
-        // p.punto4();
-
-        // p.punto5();
     }
+
 }
