@@ -514,6 +514,7 @@ public class Puntos {
         int maximo = 0;
         int minimo = 0;
         int cantidad = 0;
+        int cantidadReal = 0;
         double promedio = 0;
         double precio = 0;
         boolean correcto = true;
@@ -539,7 +540,7 @@ public class Puntos {
             if (!correcto){
                 break;
             }
-
+            cantidadReal++;
             carga = carga + peso;
 
             if( i == 0){
@@ -560,9 +561,11 @@ public class Puntos {
                 precio = precio + (peso * 1500);
             }
         }
-        promedio = (double) carga / cantidad;
+        if(cantidadReal > 0){
+            promedio = (double) carga / cantidadReal;
+        }
         double dolares = precio * 0.00032;
 
-        System.out.printf("\na.Número total de bultos ingresados para el vuelo: %d\nb. Peso del bulto más pesado y del más liviano: %d, %d\nc. Peso promedio de los bultos: %.2f\nd. Ingreso en pesos y en dólares por concepto de carga: %.2f, %.2f\n", cantidad, maximo, minimo, promedio, precio, dolares);
+        System.out.printf("\na.Número total de bultos ingresados para el vuelo: %d\nb. Peso del bulto más pesado y del más liviano: %d, %d\nc. Peso promedio de los bultos: %.2f\nd. Ingreso en pesos y en dólares por concepto de carga: %.2f, %.2f\n", cantidadReal, maximo, minimo, promedio, precio, dolares);
     }
 }
