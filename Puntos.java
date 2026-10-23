@@ -94,7 +94,7 @@ public class Puntos {
         double perimetro = 2 *  Math.PI * radio;
         double area = Math.PI * radio * radio;
 
-        System.out.println("El perimetro es: " + perimetro + "\nEl área es: " + area);
+        System.out.printf("El perimetro es %.2f, el área es %.2f", perimetro, radio);
     }
 
     void punto10() {
@@ -135,7 +135,7 @@ public class Puntos {
 
         double distancia = Math.sqrt((Math.pow(distanciaHorizontal, 2))+ (Math.pow(distanciaVertical, 2)));
 
-        System.out.println("La distancia es: " + distancia);
+        System.out.printf("La distancia es %.2f", distancia);
     }
 
     void punto13() {
@@ -159,13 +159,16 @@ public class Puntos {
     }
 
     String punto14() {
-        System.out.print("Escribe una cantidad de segundos que se convertirán a minutos y horas: ");
-        int totalSegundos = scanner.nextInt();
+        int totalSegundos = 0;
+        do{
+            System.out.print("Escribe una cantidad de segundos que se convertirán a minutos y horas: ");
+            totalSegundos = scanner.nextInt();
+        }while (totalSegundos < 0);
         int horas = totalSegundos / 3600;
         int minutos = (totalSegundos % 3600) / 60;
         int segundos = totalSegundos % 60;
 
-        return String.format("%d:%d:%d", horas, minutos, segundos);
+        return String.format("%02d:%02d:%02d", horas, minutos, segundos);
     }
 
     void parImpar() {
@@ -192,19 +195,23 @@ public class Puntos {
         }
     }
 
-    double descuento(double precio) {
+    void descuento() {
+        System.out.print("Precio: ");
+        double precio = scanner.nextDouble();
         double precioIVA = calcularIVA(precio);
         double iva = precio * 0.19;
         if (iva > 150000){
             precioIVA = precioIVA - (precioIVA * 5/100);
+            System.out.printf("El precio con descuento es: %.2f", precioIVA);
+        }else {
+            System.out.printf("No se aplica descuento, el precio es: %.2f", precioIVA);
         }
-        return precioIVA;
     }
 
     void punto18() {
         double[] notas = new double[5];
         for (int i = 1; i <= 5; i++) {
-            System.out.printf("Nota: %d", i);
+            System.out.printf("Nota %d: ", i);
             double nota = scanner.nextDouble();
             notas[i - 1] = nota;
         }
@@ -220,19 +227,27 @@ public class Puntos {
         }
     }
 
-    String punto19(double a, double b, double c) {
-        if(a == 0){
+    String punto19() {
+        System.out.println("Ecuación de la forma ax2 + bx + c");
+        System.out.print("Escriba el coeficiente a");
+        double coeficiente1 = scanner.nextDouble();
+        System.out.print("Escriba el coeficiente b");
+        double coeficiente2 = scanner.nextDouble();
+        System.out.print("Escriba el coeficiente c");
+        double coeficiente3 = scanner.nextDouble();
+
+        if(coeficiente1 == 0){
             return "Valor de a inválido";
         }
-        double determinante = ((Math.pow(b, 2)) - (4 * a * c));
-        double solucion = -b / (2 * a);
+        double determinante = ((Math.pow(coeficiente2, 2)) - (4 * coeficiente1 * coeficiente3));
+        double solucion = -coeficiente2 / (2 * coeficiente1);
         if (determinante < 0) {
             return "No hay solucion en los reales";
         } else if (determinante == 0) {
             return String.format("La solución es %.2f", solucion);
         } else {
-            double primera = solucion + (Math.sqrt(determinante)) / (2 * a);
-            double segunda = solucion - (Math.sqrt(determinante)) / (2 * a);
+            double primera = solucion + (Math.sqrt(determinante)) / (2 * coeficiente1);
+            double segunda = solucion - (Math.sqrt(determinante)) / (2 * coeficiente1);
             return String.format("La primera solución es %.2f, y la segunda es %.2f", primera, segunda);
         }
     }
@@ -253,28 +268,40 @@ public class Puntos {
 
     }
 
-    String punto21(int numero) {
+    void punto21() {
+        System.out.print("Introduzca un número: ");
+        int numero = scanner.nextInt();
         String[] numeros = {"Cero", "Uno", "Dos", "Tres", "Cuatro", "Cinco", "Seis", "Siete", "Ocho", "Nueve", "Diez"};
         if (numero >= 0 && numero<= 10){
-            return numeros[numero];
+            System.out.println(numeros[numero]);
         }else{
-            return "Número no válido";
+            System.out.println("Número no válido");
         }
     }
 
-    int punto22(int numero) {
+    void punto22() {
+        System.out.print("Introduce un número: ");
+        int numero = scanner.nextInt();
         if (numero == 0){
-            return 1;
+            System.out.print("El número de dígitos es 1 ");
+        } else{
+            int digitos = 0;
+            while (numero != 0) {
+                numero = numero / 10;
+                digitos++;
+            }
+            System.out.printf("El número de dígitos es: %d ", digitos);
         }
-        int digitos = 0;
-        while (numero != 0) {
-            numero = numero / 10;
-            digitos++;
-        }
-        return digitos;
     }
 
-    void punto23(int a, int b, int c) {
+    void punto23() {
+        System.out.println("Primer número: ");
+        int a = scanner.nextInt();
+        System.out.println("Segundo número: ");
+        int b = scanner.nextInt();
+        System.out.println("Tercer número: ");
+        int c = scanner.nextInt();
+
         if (a < b && b < c) {
             System.out.println("Los números están incrementándose");
         } else if (a > b && b > c) {
@@ -284,12 +311,16 @@ public class Puntos {
         }
     }
 
-    String punto24(int dia) {
+    void punto24() {
+        System.out.print("Introduce el número de un día de la semana: ");
+        int dia = scanner.nextInt();
+        scanner.nextLine();
         String[] semana = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"};
         if (dia >= 1 && dia <= 7) {
-            return semana[dia - 1];
+            System.out.println(semana[dia - 1]);
+        }else{
+            System.out.println("Número no válido");
         }
-        return "Número inválido";
     }
 
     String invertirTexto(String texto) {
@@ -320,16 +351,23 @@ public class Puntos {
         return texto;
     }
 
-    String punto27(String texto) {
-       String[] palabras = texto.split("\\s+");
+    void punto27() {
+        System.out.print("Introduzca el texto: ");
+        String texto = scanner.nextLine();
+       String[] palabras = texto.trim().split("\\s+");
        int size = palabras.length;
        if(palabras.length >= 2){
-           return palabras[size - 2];
+           System.out.println(palabras[size - 2]);
+       }else{
+           System.out.println("El texto no tiene suficientes palabras");
        }
-       return "El texto no tiene suficientes palabras";
     }
 
-    void punto28(String texto1,String texto2){
+    void punto28(){
+        System.out.print("Introduzca el primer texto: ");
+        String texto1 = scanner.nextLine();
+        System.out.println("Introduzca el segundo texto: ");
+        String texto2 = scanner.nextLine();
         if (texto2.contains(texto1)){
             System.out.println("El segundo texto contiene al primero");
         }
@@ -396,7 +434,7 @@ public class Puntos {
         do {
             System.out.println("Introduce el valor del lado");
             lado = scanner.nextDouble();
-        }while (lado < 0);
+        }while (lado <= 0);
         return lado;
     }
 
